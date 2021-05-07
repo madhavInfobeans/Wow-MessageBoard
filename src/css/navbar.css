@@ -1,0 +1,18 @@
+.nav-container {
+  background-color: #3a3537;
+}
+.portal {
+  font-size: 16px;
+  color: #d8d7d7;
+  align-self: center;
+  font-weight: 800;
+  margin-top: 10px;
+}
+.nav-link {
+  color: #d8d7d7;
+  font-size: 14px;
+  justify-content: stretch;
+}
+.nav-link:hover {
+  color: white;
+}
