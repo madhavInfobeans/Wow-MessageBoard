@@ -9,10 +9,18 @@
   font-weight: 800;
   margin-top: 10px;
 }
+
 .login-bg {
   background-image: url("../images/login-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.main-container {
+  flex: 1 1 auto;
+  backface-visibility: hidden;
+  min-height: 100vh;
+  max-width: 100%;
+  justify-content: space-between;
 }
 
 .login-container {
@@ -109,7 +117,7 @@ footer {
   padding: 10px;
   background: #f2f2f2;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 20px;
   margin-top: 50px;
   color: #9c9a9b;
