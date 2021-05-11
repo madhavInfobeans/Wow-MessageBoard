@@ -1,3 +1,5 @@
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import MessageBoard from "./components/MessageBoard";
@@ -5,11 +7,17 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <>
-      <Login />
-      {/* <Navbar /> */}
-      {/* <MessageBoard /> */}
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+
+        <Route exact path="/homepage">
+          <Navbar />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

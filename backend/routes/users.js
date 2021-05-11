@@ -11,23 +11,23 @@ router.get("/", function (req, res) {
 
 // register route
 router.post("/register", async (req, res) => {
-  const { name, password } = req.body;
-  if (!name || !password) {
-    return res.status(422).json({ error: "plz fill all fields" });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(422).json({ error: "Please insert data in all fields" });
   }
   try {
-    const userExist = await User.findOne({ where: { name: name } });
+    const userExist = await User.findOne({ where: { email: email } });
     if (userExist) {
-      return res.status(422).json({ error: "THIS Name Already Exist" });
+      return res.status(422).json({ error: "THIS email Already Exist" });
     } else {
       const userData = {
-        name,
+        email,
         password,
       };
       const userRegistered = await User.create(userData);
       if (userRegistered) {
         res.status(201).json({ message: "user registered succesffully" });
-        console.log(userRegistered.name);
+        console.log(userRegistered.email);
       } else {
         res.status(500).json({ error: "Failed to register" });
       }
@@ -39,26 +39,27 @@ router.post("/register", async (req, res) => {
 
 //Login Route
 router.post("/login", async (req, res) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
 
-  const userData = await User.findOne({ where: { name } }).catch(err => {
+  const userData = await User.findOne({ where: { email } }).catch(err => {
     console.log("Error: ", err);
   });
 
   if (!userData) {
     return res
       .status(400)
-      .json({ message: "name or password does not match!" });
+      .json({ message: "email or password does not match!" });
   }
   const isMatch = await bcrypt.compare(password, userData.password);
+
   if (!isMatch) {
     return res
       .status(400)
-      .json({ message: "name or password does not match!" });
+      .json({ message: "email or password does not match!" });
   }
 
   const jwtToken = jwt.sign(
-    { id: userData.id, name: userData.name },
+    { id: userData.id, email: userData.email },
     process.env.JWT_SECRET
   );
   res.json({

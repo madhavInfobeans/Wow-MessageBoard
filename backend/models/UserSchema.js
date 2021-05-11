@@ -8,7 +8,7 @@ const Sequelize = require("sequelize");
 
 // create user model
 const userSchema = sequelize.define("user", {
-  name: {
+  email: {
     type: Sequelize.STRING,
   },
   password: {
