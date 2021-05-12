@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/UserSchema");
+const MessageBoard = require("../models/MessageBoardSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -7,6 +8,40 @@ const router = express.Router();
 
 router.get("/", function (req, res) {
   res.json({ message: "Express is up! and running " });
+});
+
+// message board route
+router.post("/messageboard", async (req, res) => {
+  const { image, title, description, announcement, likes, comments } = req.body;
+  if (
+    !image ||
+    !title ||
+    !description ||
+    !announcement ||
+    !likes ||
+    !comments
+  ) {
+    return res.status(422).json({ error: "Please Fill All data fields" });
+  }
+  try {
+    const messageBoardData = {
+      image,
+      title,
+      description,
+      announcement,
+      likes,
+      comments,
+    };
+    const messageboard = await MessageBoard.create(messageBoardData);
+    if (messageboard) {
+      res.status(201).json({ message: "Message Board data generated" });
+      console.log(messageboard.title);
+    } else {
+      res.status(500).json({ error: "Failed to insert data" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // register route

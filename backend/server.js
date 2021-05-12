@@ -9,6 +9,7 @@ dotenv.config({ path: "./.env" });
 require("./db/connection");
 require("./auth/passport-config");
 const User = require("./models/UserSchema");
+const MessageBoard = require("./models/MessageBoardSchema");
 
 const app = express();
 // initialize passport with express
@@ -29,7 +30,11 @@ app.use(require("./routes/users"));
 
 User.sync()
   .then(() => console.log("User table created successfully"))
-  .catch(err => console.log("Wrong db credebtials "));
+  .catch(err => console.log("Wrong db credebtials ", err));
+
+MessageBoard.sync()
+  .then(() => console.log("Message Board table created"))
+  .catch(err => console.log("Something went wrong", err));
 
 app.listen(PORT, () => {
   console.log(`Express Server listening on ${PORT}`);
