@@ -1,32 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "../images/logo-main.png";
 import "../css/login.css";
 
-function Login() {
+const user = {
+  email: "madhav@gmail.com",
+  password: "test@123",
+};
+const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const loginUser = async e => {
+  if (sessionStorage.token) {
+    history.push("/");
+  }
+  const login = e => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    const data = res.json();
-    if (res.status === 400 || !data) {
-      window.alert("Invalid Credentials");
-    } else {
-      window.alert("Login Successfully");
+
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    if (email === user.email && password === user.password) {
+      sessionStorage.setItem("token", email);
+      alert("Login Successfully");
       history.push("/homepage");
+    } else {
+      alert("Invalid credentials");
     }
   };
+
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [user, setUser] = useState("");
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //   }
+  // }, []);
+
+  // const handleLogout = () => {
+  //   setUser({});
+  //   setEmail("");
+  //   setPassword("");
+  //   localStorage.clear();
+  // };
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const user = { email, password };
+  //   const response = await axios.post("http://localhost:4000/login", user);
+  // };
+  // setUser(response.data);
+  // localStorage.setItem("user", JSON.stringify(response.data));
+
   return (
     <>
       <div className="main-container login-bg">
@@ -45,16 +72,13 @@ function Login() {
               <div className="logo">
                 <img src="https://infobeans-design-system.web.app/images/logo-infobeans-black.svg" />
               </div>
-              <form method="POST">
+              <form method="POST" onSubmit={login}>
                 <div className="form-group">
                   <label className="form-label">Email</label>
                   <input
                     type="text"
                     name="email"
                     placeholder="Your Infobeans email address"
-                    id="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -65,9 +89,7 @@ function Login() {
                   <input
                     type="password"
                     placeholder="Your password"
-                    id="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    name="password"
                   />
                 </div>
                 <div className="form-group">
@@ -75,9 +97,6 @@ function Login() {
                     type="submit"
                     className="btn btn-block ButtonFirst"
                     value="Login to Intranet Portal"
-                    name="login"
-                    id="login"
-                    onClick={loginUser}
                   />
                 </div>
                 <div className="form-group">
@@ -98,6 +117,6 @@ function Login() {
       </div>
     </>
   );
-}
+};
 
 export default Login;
