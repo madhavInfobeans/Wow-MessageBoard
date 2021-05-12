@@ -3,6 +3,7 @@ const User = require("../models/UserSchema");
 const MessageBoard = require("../models/MessageBoardSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const conn = require("../db/connection");
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.get("/", function (req, res) {
   res.json({ message: "Express is up! and running " });
 });
 
-// message board route
+// posting data to message board table
 router.post("/messageboard", async (req, res) => {
   const { image, title, description, announcement, likes, comments } = req.body;
   if (
@@ -41,6 +42,16 @@ router.post("/messageboard", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+  }
+});
+
+// getting data from message board table
+router.get("/messageboard", async (req, res) => {
+  const data = await MessageBoard.findOne({});
+  if (data) {
+    res.status(201).send(data.description);
+  } else {
+    res.status(400).json({ error: "error in db " });
   }
 });
 
