@@ -1,7 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Lnd from "../images/Lnd.png";
 import "../css/messageboard.css";
 function MessageBoard() {
+  const history = useHistory();
+  if (!sessionStorage.token) {
+    history.push("/login");
+  }
   return (
     <>
       <div className="container-fluid bg-home-top">
