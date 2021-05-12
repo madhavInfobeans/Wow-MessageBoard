@@ -14,7 +14,7 @@ function App() {
         </Route>
 
         <Route exact path="/homepage">
-          <Navbar />
+          <MessageBoard />
         </Route>
       </Switch>
     </BrowserRouter>
