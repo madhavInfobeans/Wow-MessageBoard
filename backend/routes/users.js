@@ -49,7 +49,7 @@ router.post("/messageboard", async (req, res) => {
 router.get("/messageboard", async (req, res) => {
   const data = await MessageBoard.findOne({});
   if (data) {
-    res.status(201).send(data.description);
+    res.status(201).send(data);
   } else {
     res.status(400).json({ error: "error in db " });
   }

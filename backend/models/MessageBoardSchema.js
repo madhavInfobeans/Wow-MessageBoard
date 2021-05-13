@@ -7,7 +7,7 @@ const Sequelize = require("sequelize");
 // create Message Board model
 const messageBoardSchema = sequelize.define("messageboard", {
   image: {
-    type: Sequelize.BLOB,
+    type: Sequelize.STRING,
   },
   title: {
     type: Sequelize.STRING,
