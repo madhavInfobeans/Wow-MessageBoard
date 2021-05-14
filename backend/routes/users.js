@@ -3,7 +3,38 @@ const User = require("../models/UserSchema");
 const MessageBoard = require("../models/MessageBoardSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const conn = require("../db/connection");
+const path = require("path");
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../resources/uploads"));
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().getTime() + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/png"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter,
+});
 
 const router = express.Router();
 
@@ -12,21 +43,17 @@ router.get("/", function (req, res) {
 });
 
 // posting data to message board table
-router.post("/messageboard", async (req, res) => {
-  const { image, title, description, announcement, likes, comments } = req.body;
-  if (
-    !image ||
-    !title ||
-    !description ||
-    !announcement ||
-    !likes ||
-    !comments
-  ) {
+router.post("/messageboard", upload.single("image"), async (req, res) => {
+  console.log(req.file);
+  const { title, description, announcement, likes, comments } = req.body;
+
+  if (!title || !description || !announcement || !likes || !comments) {
     return res.status(422).json({ error: "Please Fill All data fields" });
   }
+
   try {
     const messageBoardData = {
-      image,
+      image: req.file.filename,
       title,
       description,
       announcement,
