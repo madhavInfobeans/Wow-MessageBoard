@@ -20,10 +20,8 @@ const Login = () => {
 
     if (email === user.email && password === user.password) {
       sessionStorage.setItem("token", email);
-      alert("Login Successfully");
       history.push("/homepage");
     } else {
-      alert("Invalid credentials");
     }
   };
 
