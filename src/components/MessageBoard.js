@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Lnd from "../images/Lnd.png";
 import "../css/messageboard.css";
 function MessageBoard() {
-  const history = useHistory();
-  if (!sessionStorage.token) {
+  const [userData, setUserData] = useState({});
+  let history = useHistory();
+  if (!localStorage.token) {
     history.push("/");
   }
-  const [userData, setUserData] = useState({});
 
   const callMessageBoardPage = async () => {
     try {
       const res = await fetch("http://localhost:4000/messageboard", {
         method: "GET",
         headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
+          "Content-type": "multipart/form-data",
         },
       });
       const data = await res.json();
@@ -42,7 +40,7 @@ function MessageBoard() {
               See All <i className="fa fa-angle-right"></i>
             </a>
           </h3>
-          <form method="GET">
+          <form method="GET" encType="multipart/form-data">
             <div className="announcement-item row">
               <div className="image col-sm-4 col-md-2">
                 <a>

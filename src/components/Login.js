@@ -1,27 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 import logo from "../images/logo-main.png";
 import "../css/login.css";
 
-const user = {
-  email: "madhav@gmail.com",
-  password: "test@123",
-};
 const Login = () => {
   const history = useHistory();
-  if (sessionStorage.token) {
-    history.push("/");
+  if (localStorage.email) {
+    history.push("/homepage");
   }
+
+  const validateEmail = email => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const login = e => {
     e.preventDefault();
-
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
-    if (email === user.email && password === user.password) {
-      sessionStorage.setItem("token", email);
-      history.push("/homepage");
+    if (!validateEmail(email)) {
+      document.querySelector(".error_email").style.display = "block";
     } else {
+      axios
+        .post("http://localhost:4000/login", {
+          email: email,
+          password: password,
+        })
+        .then(
+          response => {
+            if (response.data.token) {
+              localStorage.token = response.data.token;
+              history.push("/homepage");
+            } else {
+              alert("Invalid credentials");
+            }
+          },
+          error => {
+            console.log(error);
+          }
+        );
     }
   };
 

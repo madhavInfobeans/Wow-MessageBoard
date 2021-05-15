@@ -133,13 +133,23 @@ router.post("/login", async (req, res) => {
 
   const jwtToken = jwt.sign(
     { id: userData.id, email: userData.email },
-    process.env.JWT_SECRET
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    }
   );
   res.json({
     message: "Welcome Back you are Login with Token!",
     token: jwtToken,
   });
   console.log(`Token for Login is: ${jwtToken}`);
+  // const cookieOptions = {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
+  //   ),
+  //   httpOnly: true,
+  // };
+  // res.cookie("jwt", jwtToken, cookieOptions);
 });
 
 module.exports = router;
