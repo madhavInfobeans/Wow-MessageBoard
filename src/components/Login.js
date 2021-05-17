@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import logo from "../images/logo-main.png";
 import "../css/login.css";
+import "../js/loginValidation";
+import $ from "jquery";
 
 const Login = () => {
   const history = useHistory();
@@ -90,14 +92,16 @@ const Login = () => {
               <div className="logo">
                 <img src="https://infobeans-design-system.web.app/images/logo-infobeans-black.svg" />
               </div>
-              <form method="POST" onSubmit={login}>
+              <form method="POST" onSubmit={login} id="loginForm">
                 <div className="form-group">
                   <label className="form-label">Email</label>
                   <input
                     type="text"
                     name="email"
+                    id="email"
                     placeholder="Your Infobeans email address"
                   />
+                  <p class="ml-2" id="emailMsg"></p>
                 </div>
                 <div className="form-group">
                   <a className="float-right forgot" href="#">
@@ -106,9 +110,11 @@ const Login = () => {
                   <label className="form-label">Password</label>
                   <input
                     type="password"
+                    id="password"
                     placeholder="Your password"
                     name="password"
                   />
+                  <p class="ml-0" id="passwordMsg"></p>
                 </div>
                 <div className="form-group">
                   <input
