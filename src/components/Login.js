@@ -4,7 +4,6 @@ import axios from "axios";
 import logo from "../images/logo-main.png";
 import "../css/login.css";
 import "../js/loginValidation";
-import $ from "jquery";
 
 const Login = () => {
   const history = useHistory();
@@ -12,39 +11,29 @@ const Login = () => {
     history.push("/homepage");
   }
 
-  const validateEmail = email => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-
   const login = e => {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
-    if (!validateEmail(email)) {
-      document.querySelector(".error_email").style.display = "block";
-    } else {
-      axios
-        .post("http://localhost:4000/login", {
-          email: email,
-          password: password,
-        })
-        .then(
-          response => {
-            if (response.data.token) {
-              localStorage.token = response.data.token;
-              history.push("/homepage");
-            } else {
-              alert("Invalid credentials");
-            }
-          },
-          error => {
-            console.log(error);
+    axios
+      .post("http://localhost:4000/login", {
+        email: email,
+        password: password,
+      })
+      .then(
+        response => {
+          if (response.data.token) {
+            localStorage.token = response.data.token;
+            history.push("/homepage");
+          } else {
+            alert("Invalid credentials");
           }
-        );
-    }
+        },
+        error => {
+          console.log(error);
+        }
+      );
   };
 
   // const [email, setEmail] = useState("");
