@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
-import MessageBoard from "./components/MessageBoard";
+import MessageBoardData from "./components/MessageBoardData";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 
         <Route exact path="/homepage">
           <Navbar />
-          <MessageBoard />
+          <MessageBoardData />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -2,32 +2,29 @@
   background-color: #f2f2f2;
   margin-bottom: 30px;
 }
-
-.home-mesage-h1 {
-  margin-top: 40px;
+.container-fluid {
+  width: 100%;
 }
-h3 {
-  font-size: 18px;
+
+.color-grey {
+  color: #3a3537;
 }
 .strech-home {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
+
 .home-h1 {
   margin: 15px 0px 0px;
 }
-form {
-  margin-top: 10px;
-}
+
 a.see-all {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   white-space: nowrap;
-  color: #ea1b3c;
 }
-
 .announcement-item {
   padding: 24px;
   display: flex;
@@ -36,6 +33,91 @@ a.see-all {
   background-color: #fff;
 }
 
-.announcement-item {
-  background: transparent;
+.announcement-item .image {
+  min-width: auto;
+  height: auto;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.announcement-item .content .heading a {
+  color: #3a3537;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  line-height: 32px;
+}
+.announcement-item .content p.info {
+  color: #9c9a9b;
+  height: auto;
+}
+p.small {
+  font-size: 14px;
+}
+p {
+  font-size: 16px;
+  color: #3a3537;
+}
+
+.announcement-item .content .tag-and-actions {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-content: center;
+}
+.announcement-item .tag-and-actions .social-actions {
+  margin-left: auto;
+  padding-bottom: 0px;
+}
+.social-actions {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  display: inline-block;
+}
+.social-actions li,
+.social-actions li a {
+  display: inline-flex;
+  align-items: flex-end;
+  text-decoration: none;
+  color: #3a3537;
+  margin-bottom: 0px;
+}
+
+/* // Carousel css */
+
+.owl-prev {
+  left: -30px;
+}
+
+.owl-next {
+  right: -30px;
+}
+
+.owl-prev,
+.owl-next {
+  position: absolute;
+  top: 100px;
+}
+
+.owl-prev span,
+.owl-next span {
+  font-size: 30px;
+  padding: 10px;
+  font-weight: normal;
+  width: 30%;
+  color: #ea1b3c;
+  background-color: silver;
+  outline: none;
+}
+
+.owl-next span:hover,
+.owl-prev span:hover {
+  color: white;
+  background-color: red;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #ea1b3c !important;
 }
