@@ -9,10 +9,13 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../resources/uploads"));
+    cb(
+      null,
+      "/../Users/LENOVO/Desktop/Infobeans_Projects/Design_System_Message_Board/public/"
+    );
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().getTime() + file.originalname);
+    cb(null, new Date().getTime() + path.extname(file.originalname));
   },
 });
 
@@ -45,15 +48,27 @@ router.get("/", function (req, res) {
 // posting data to message board table
 router.post("/messageboard", upload.single("image"), async (req, res) => {
   console.log(req.file);
-  const { title, description, announcement, likes, comments } = req.body;
+  const image = req.file.filename;
+  const title = req.body.title;
+  const description = req.body.description;
+  const announcement = req.body.announcement;
+  const likes = req.body.likes;
+  const comments = req.body.comments;
 
-  if (!title || !description || !announcement || !likes || !comments) {
+  if (
+    !image ||
+    !title ||
+    !description ||
+    !announcement ||
+    !likes ||
+    !comments
+  ) {
     return res.status(422).json({ error: "Please Fill All data fields" });
   }
 
   try {
     const messageBoardData = {
-      image: req.file.filename,
+      image,
       title,
       description,
       announcement,
@@ -74,7 +89,7 @@ router.post("/messageboard", upload.single("image"), async (req, res) => {
 
 // getting data from message board table
 router.get("/messageboard", async (req, res) => {
-  const data = await MessageBoard.findOne({});
+  const data = await MessageBoard.findAll({});
   if (data) {
     res.status(201).send(data);
   } else {
