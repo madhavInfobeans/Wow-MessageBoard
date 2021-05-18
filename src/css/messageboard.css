@@ -24,6 +24,7 @@ a.see-all {
   font-size: 16px;
   line-height: 20px;
   white-space: nowrap;
+  color: #ea1b3c;
 }
 .announcement-item {
   padding: 24px;
@@ -52,11 +53,37 @@ a.see-all {
   height: auto;
 }
 p.small {
-  font-size: 14px;
+  font-size: 18px;
 }
 p {
-  font-size: 16px;
+  font-size: 20px;
   color: #3a3537;
+}
+.announcement-item,
+.card-achievement {
+  background: transparent;
+}
+
+.announcement-item .content {
+  position: relative;
+}
+
+.announcement-item .content {
+  align-self: flex-start;
+}
+.announcement-item:hover h3.heading {
+  color: #ea1b3c;
+}
+
+.announcement-item .content .heading {
+  color: #3a3537;
+}
+.announcement-item .content .heading a {
+  color: #3a3537;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  line-height: 32px;
 }
 
 .announcement-item .content .tag-and-actions {
@@ -68,6 +95,23 @@ p {
 .announcement-item .tag-and-actions .social-actions {
   margin-left: auto;
   padding-bottom: 0px;
+}
+.announcement-item .content .tag-and-actions a.tag {
+  background: #f2f2f2;
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 0px 16px;
+  border-radius: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #3a3537;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+}
+.announcement-item .content .tag-and-actions a.tag:hover {
+  color: #ea1b3c;
 }
 .social-actions {
   padding-left: 0;

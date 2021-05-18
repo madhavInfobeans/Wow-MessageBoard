@@ -6,6 +6,7 @@ import "owl.carousel/dist/assets/owl.carousel.min.css";
 import "owl.carousel/dist/assets/owl.theme.default.min.css";
 import MessageBoard from "./MessageBoard";
 import "../css/messageboard.css";
+import { AiOutlineRight } from "react-icons/all";
 const options = {
   nav: true,
   items: 1,
@@ -36,7 +37,13 @@ function MessageBoardData() {
 
   const callMessageBoardPage = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/messageboard");
+      const res = await axios({
+        method: "GET",
+        url: "http://localhost:4000/messageboard",
+        headers: {
+          Authorization: `token ${localStorage.token}`,
+        },
+      });
       const data = await res.data;
       console.log(data);
       setMessageBoard(data);
@@ -60,7 +67,7 @@ function MessageBoardData() {
               <h3 className="home-h1 strech-home color-grey home-mesage-h1">
                 Message Board
                 <a href="" className="see-all">
-                  See All <i className="ibic-arrow-right"></i>
+                  See All <AiOutlineRight />
                 </a>
               </h3>
             </div>

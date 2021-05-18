@@ -30,10 +30,9 @@ function MessageBoard(props) {
           </h3>
           <p className="small info">
             <span className="location">
-              <FaMapMarkerAlt />
-              India
+              <FaMapMarkerAlt /> India
             </span>
-            <span className="calendar">
+            <span className="calendar ml-3">
               <FiCalendar /> May 22, 2020 3:20 pm
             </span>
           </p>
@@ -43,7 +42,7 @@ function MessageBoard(props) {
               {props.data.announcement}
             </a>
             <ul className="social-actions">
-              <li className="like-active-icon">
+              <li className="like-active-icon mr-3">
                 <a href="#">
                   <FiThumbsUp />
                   {props.data.likes}

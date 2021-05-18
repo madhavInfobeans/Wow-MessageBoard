@@ -4,6 +4,7 @@ const MessageBoard = require("../models/MessageBoardSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const path = require("path");
+const authRoute = require("../auth/jwtAuth");
 
 const multer = require("multer");
 
@@ -88,7 +89,7 @@ router.post("/messageboard", upload.single("image"), async (req, res) => {
 });
 
 // getting data from message board table
-router.get("/messageboard", async (req, res) => {
+router.get("/messageboard", authRoute, async (req, res) => {
   const data = await MessageBoard.findAll({});
   if (data) {
     res.status(201).send(data);
