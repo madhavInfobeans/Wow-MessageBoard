@@ -74,6 +74,9 @@ function MessageBoardData() {
             )}
           </div>
         </div>
+        <footer className="homepage__footer">
+          &copy; Copyright 2020 InfoBeans. All Rights Reserved.
+        </footer>
       </div>
     </>
   );

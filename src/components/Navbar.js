@@ -1,8 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import logo from "../images/logo-main.png";
 import "../css/navbar.css";
 
 function Navbar() {
+  let history = useHistory();
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-md navbar nav-container">
@@ -68,7 +75,7 @@ function Navbar() {
                   Account Setting
                 </a>
                 <div className="dropdown-divider"></div>
-                <a href="#" className="dropdown-item">
+                <a href="#" className="dropdown-item" onClick={logout}>
                   Logout
                 </a>
               </div>
