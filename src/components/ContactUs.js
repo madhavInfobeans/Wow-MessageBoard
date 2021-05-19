@@ -8,52 +8,51 @@ const ContactUs = () => {
         <form className="contact-form ">
           <span className="contact-form-title">Get in Touch</span>
           <div className="contact-input-field ">
+            <label className="input-label">
+              <i className="fas fa-user"></i>
+            </label>
             <input
               className="input-field"
               id="name"
-              type="text"
+              type="string"
               name="fname"
               placeholder="Your FirstName"
             />
+          </div>
+          <div className="contact-input-field ">
             <label className="input-label">
               <i className="fas fa-user"></i>
             </label>
-          </div>
-          <div className="contact-input-field ">
             <input
               className="input-field"
               id="name"
-              type="text"
+              type="textInput"
               name="lname"
               placeholder="Your LastName"
             />
-            <label className="input-label">
-              <i className="fas fa-user"></i>
-            </label>
           </div>
           <div className="contact-input-field ">
-            <input
-              className="input-field"
-              id="email"
-              type="text"
-              name="email"
-              placeholder=" Enter Email"
-            />
             <label className="input-label">
               <i className="far fa-envelope"></i>
             </label>
-          </div>
-          <div className="contact-input-field ">
             <input
               className="input-field"
-              id="mobile"
-              type="text"
-              name="mobile"
-              placeholder="Contact"
+              type="textInput"
+              name="email"
+              placeholder=" Enter Email"
             />
+          </div>
+          <div className="contact-input-field ">
             <label className="input-label">
               <i className="fas fa-mobile"></i>
             </label>
+            <input
+              className="input-field"
+              id="mobile"
+              type="textInput"
+              name="mobile"
+              placeholder="Contact"
+            />
           </div>
           <div className="contact-input-field ">
             <input

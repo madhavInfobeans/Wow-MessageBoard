@@ -13,6 +13,7 @@ input:focus::placeholder {
   align-items: center;
   padding: 15px;
   background: #e6e6e6;
+  min-height: 100vh;
 }
 
 .contact {
@@ -51,16 +52,13 @@ input:focus::placeholder {
   width: 58px;
   height: 62px;
   position: absolute;
-  top: 0;
-  left: 0;
   cursor: pointer;
   font-size: 18px;
   color: #999999;
-  border-radius: 25px;
 }
 
 .input-field {
-  display: block;
+  display: flex;
   width: 100%;
   background: transparent;
   font-size: 15px;
