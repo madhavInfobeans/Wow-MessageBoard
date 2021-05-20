@@ -8,6 +8,7 @@ dotenv.config({ path: "./.env" });
 require("./db/connection");
 const User = require("./models/UserSchema");
 const MessageBoard = require("./models/MessageBoardSchema");
+const Contact = require("./models/Contact");
 
 const app = express();
 

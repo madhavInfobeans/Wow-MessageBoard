@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/UserSchema");
 const MessageBoard = require("../models/MessageBoardSchema");
+const Contact = require("../models/Contact");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const path = require("path");
@@ -10,10 +11,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(
-      null,
-      "/../Users/LENOVO/Desktop/Infobeans_Projects/Design_System_Message_Board/public/"
-    );
+    cb(null, "../public/uploads/images");
   },
   filename: (req, file, cb) => {
     cb(null, new Date().getTime() + path.extname(file.originalname));
@@ -46,10 +44,45 @@ router.get("/", function (req, res) {
   res.json({ message: "Express is up! and running " });
 });
 
+// posting data to contact table
+router.post("/contact", upload.single("attachment"), async (req, res) => {
+  console.log(req.file);
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const email = req.body.email;
+  const mobile = req.body.mobile;
+  const message = req.body.message;
+  const attachment = req.file.filename;
+
+  if (!firstname || !lastname || !email || !mobile || !message || !attachment) {
+    return res.status(422).json({ error: "Please Fill All data fields" });
+  }
+
+  try {
+    const contactData = {
+      firstname,
+      lastname,
+      email,
+      mobile,
+      message,
+      attachment,
+    };
+    const contact = await Contact.create(contactData);
+    if (contact) {
+      res.status(201).json({ message: "Contact us data generated" });
+      console.log(contact.mobile);
+    } else {
+      res.status(500).json({ error: "Failed to insert data" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // posting data to message board table
 router.post("/messageboard", upload.single("image"), async (req, res) => {
   console.log(req.file);
-  const image = req.file.filename;
+  const image = "./uploads/images/" + req.file.filename;
   const title = req.body.title;
   const description = req.body.description;
   const announcement = req.body.announcement;
@@ -79,7 +112,7 @@ router.post("/messageboard", upload.single("image"), async (req, res) => {
     const messageboard = await MessageBoard.create(messageBoardData);
     if (messageboard) {
       res.status(201).json({ message: "Message Board data generated" });
-      console.log(messageboard.title);
+      console.log("Message Board Data inserted into dB");
     } else {
       res.status(500).json({ error: "Failed to insert data" });
     }
