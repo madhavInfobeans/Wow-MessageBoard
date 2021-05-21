@@ -8,7 +8,7 @@ const path = require("path");
 const authRoute = require("../auth/jwtAuth");
 
 const multer = require("multer");
-const nodemailer = require("nodemailer");
+const emailConfig = require("../config/nodemailer");
 
 const storage1 = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -95,6 +95,20 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
     };
     const contact = await Contact.create(contactData);
     if (contact) {
+      let mailOptions = {
+        from: "madhavrajput.1996@gmail.com",
+        to: email,
+        subject: "Testing",
+        html: "test mail",
+        attachments: [{ filename: attachment }],
+      };
+
+      emailConfig.sendMail(mailOptions, (err, result) => {
+        if (err) {
+          console.log("Error while sending mail", err);
+        }
+        console.log("Email sent succesfully");
+      });
       res.status(201).json({ message: "Contact us data generated" });
       console.log(contact.mobile);
     } else {
