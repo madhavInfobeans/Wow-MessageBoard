@@ -8,6 +8,32 @@ const path = require("path");
 const authRoute = require("../auth/jwtAuth");
 
 const multer = require("multer");
+const nodemailer = require("nodemailer");
+
+const storage1 = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "../public/uploads/files");
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().getTime() + path.extname(file.originalname));
+  },
+});
+
+const fileFilter1 = (req, file, cb) => {
+  if (file.mimetype === "image/png" || file.mimetype === "application/pdf") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload1 = multer({
+  storage: storage1,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter1,
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -45,14 +71,14 @@ router.get("/", function (req, res) {
 });
 
 // posting data to contact table
-router.post("/contact", upload.single("attachment"), async (req, res) => {
+router.post("/contact", upload1.single("attachment"), async (req, res) => {
   console.log(req.file);
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
   const mobile = req.body.mobile;
   const message = req.body.message;
-  const attachment = req.file.filename;
+  const attachment = "./uploads/files" + req.file.filename;
 
   if (!firstname || !lastname || !email || !mobile || !message || !attachment) {
     return res.status(422).json({ error: "Please Fill All data fields" });
@@ -76,6 +102,16 @@ router.post("/contact", upload.single("attachment"), async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+  }
+});
+
+// getting data from contact table
+router.get("/contact", async (req, res) => {
+  const data = await Contact.findAll({});
+  if (data) {
+    res.status(201).send(data);
+  } else {
+    res.status(400).json({ error: "error in db " });
   }
 });
 

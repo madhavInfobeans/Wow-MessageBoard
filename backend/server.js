@@ -33,6 +33,10 @@ MessageBoard.sync()
   .then(() => console.log("Message Board table created"))
   .catch(err => console.log("Something went wrong", err));
 
+Contact.sync()
+  .then(() => console.log("Contact us table created"))
+  .catch(err => console.log("Something went wrong", err));
+
 app.listen(PORT, () => {
   console.log(`Express Server listening on ${PORT}`);
 });
