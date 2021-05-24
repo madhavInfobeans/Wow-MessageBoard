@@ -98,7 +98,7 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
       let mailOptions = {
         from: "madhavrajput.1996@gmail.com",
         to: email,
-        cc:["sandeep@gmail.com","neelesh@gmail.com"],
+        cc: ["aayush.sharma@infobeans.com", "madhavsrajput392@gmail.com"],
         subject: "Testing",
         html: "test mail",
         attachments: [{ filename: attachment }],

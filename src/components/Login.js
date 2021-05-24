@@ -7,7 +7,7 @@ import "../js/loginValidation";
 
 const Login = () => {
   const history = useHistory();
-  if (localStorage.email) {
+  if (localStorage.token) {
     history.push("/homepage");
   }
 
@@ -66,14 +66,14 @@ const Login = () => {
   return (
     <>
       <div className="main-container login-bg">
-        <nav className="nav-container">
+        {/* <nav className="nav-container">
           <span>
             <a className="logo-brand ml-2 p-2" href="#">
               <img src={logo} height="58px" width="116px" alt="Logo Here" />
             </a>
             <span className="portal">Intranet Portal</span>
           </span>
-        </nav>
+        </nav> */}
 
         <div className="login-container">
           <div className="card">

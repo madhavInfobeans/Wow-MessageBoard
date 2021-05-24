@@ -5,6 +5,9 @@ import axios from "axios";
 
 const ContactUs = () => {
   const history = useHistory();
+  if (!localStorage.token) {
+    history.push("/");
+  }
   const [inputData, setContact] = useState({
     firstname: "",
     lastname: "",
@@ -41,9 +44,9 @@ const ContactUs = () => {
     const data = await res.data;
     console.log(data);
     if (res.status === 422 || !data) {
-      window.alert("Invalid Registration");
+      window.alert("Form not submitted");
     } else {
-      window.alert("Contact form submitted");
+      history.push("/displayuser");
     }
   };
   return (

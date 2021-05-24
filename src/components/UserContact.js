@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../css/userlist.css";
 import UserContactList from "./UserContactList";
 import axios from "axios";
 
 function UserContact() {
+  const history = useHistory();
+  if (!localStorage.token) {
+    history.push("/");
+  }
   var [usercontact, setContactList] = useState([]);
 
   const callUserContact = async () => {

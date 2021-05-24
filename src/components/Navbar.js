@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import logo from "../images/logo-main.png";
 import "../css/navbar.css";
 
@@ -14,9 +14,9 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-md navbar nav-container">
         <span>
-          <a href="#" className="logo-brand ml-2 p-2">
+          <NavLink to="#" className="logo-brand ml-2 p-2">
             <img src={logo} height="48px" width="116px" alt="Logo Here" />
-          </a>
+          </NavLink>
           <span className="portal">Intranet Portal</span>
         </span>
         <button
@@ -30,55 +30,29 @@ function Navbar() {
         <div id="navbarCollapse" className="collapse navbar-collapse">
           <ul className="nav navbar-nav ml-auto">
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <NavLink to="/homepage" className="nav-link">
                 Home
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <NavLink to="/messageboard" className="nav-link">
                 Message Board
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                Tides
-              </a>
+              <NavLink to="/contactus" className="nav-link">
+                ContactUs
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                Applauds
-              </a>
+              <NavLink to="/displayuser" className="nav-link">
+                Display User
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                Gallery
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                Jobs
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                href="#"
-                className="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-              >
-                Admin
-              </a>
-              <div className="dropdown-menu dropdown-menu-right">
-                <a href="#" className="dropdown-item">
-                  My Profile
-                </a>
-                <a href="#" className="dropdown-item">
-                  Account Setting
-                </a>
-                <div className="dropdown-divider"></div>
-                <a href="#" className="dropdown-item" onClick={logout}>
-                  Logout
-                </a>
-              </div>
+              <NavLink to="/" className="nav-link" onClick={logout}>
+                Logout
+              </NavLink>
             </li>
           </ul>
         </div>
