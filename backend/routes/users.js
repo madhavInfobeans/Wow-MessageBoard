@@ -134,7 +134,7 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
         <p>Check if there is any query needs to be solved, whenever you are free</p>
         <ul>
         <li>Some User Details for your Reference:</li><br>
-        <li>Name : ${req.body.fname} ${req.body.lname}</li>
+        <li>Name : ${req.body.firstname} ${req.body.lastname}</li>
         <li>Mobile : ${req.body.mobile}</li>
         </ul>
         `,
