@@ -78,7 +78,7 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
   const email = req.body.email;
   const mobile = req.body.mobile;
   const message = req.body.message;
-  const attachment = "./uploads/files" + req.file.filename;
+  const attachment = "../public/uploads/files/" + req.file.filename;
 
   if (!firstname || !lastname || !email || !mobile || !message || !attachment) {
     return res.status(422).json({ error: "Please Fill All data fields" });
@@ -96,12 +96,22 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
     const contact = await Contact.create(contactData);
     if (contact) {
       let mailOptions = {
-        from: "madhavrajput.1996@gmail.com",
+        from: {
+          name: "Madhav Singh Rajput",
+          address: "madhavrajput.1996@gmail.com",
+        },
         to: email,
-        cc: ["aayush.sharma@infobeans.com", "madhavsrajput392@gmail.com"],
-        subject: "Testing",
-        html: "test mail",
-        attachments: [{ filename: attachment }],
+        subject: "Welcome to Wow Family",
+        html: `<h2>Hey Thanks ${req.body.firstname} for your fine time to fill the form.</h2>
+        <p>Your concern has been received to us. If you face any problem kindly reach out to us on 1800-230-961.</p>
+        `,
+        attachments: [
+          {
+            filename: attachment,
+            path: attachment,
+            contentType: "application/pdf",
+          },
+        ],
       };
 
       emailConfig.sendMail(mailOptions, (err, result) => {
@@ -110,6 +120,40 @@ router.post("/contact", upload1.single("attachment"), async (req, res) => {
         }
         console.log("Email sent succesfully");
       });
+
+      // Admin Email Block
+
+      let mailOptionsAdmin = {
+        from: {
+          name: "Madhav Singh Rajput",
+          address: "madhavrajput.1996@gmail.com",
+        },
+        cc: ["premr2676@gmail.com", "madhav.singh@infobeans.com"],
+        subject: `New User Added `,
+        html: `<h2>A new person ${req.body.firstname} has recently fill the form.</h2>
+        <p>Check if there is any query needs to be solved, whenever you are free</p>
+        <ul>
+        <li>Some User Details for your Reference:</li><br>
+        <li>Name : ${req.body.fname} ${req.body.lname}</li>
+        <li>Mobile : ${req.body.mobile}</li>
+        </ul>
+        `,
+        attachments: [
+          {
+            filename: attachment,
+            path: attachment,
+            contentType: "application/pdf",
+          },
+        ],
+      };
+
+      emailConfig.sendMail(mailOptionsAdmin, (err, result) => {
+        if (err) {
+          console.log("Error while sending mail", err);
+        }
+        console.log("Email sent to Admin");
+      });
+
       res.status(201).json({ message: "Contact us data generated" });
       console.log(contact.mobile);
     } else {
