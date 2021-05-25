@@ -123,7 +123,7 @@ $(document).ready(function () {
     var attachment_val = $("#attachment").val();
 
     if (attachment_val !== "") {
-      var allowedFiles = [".doc", ".docx", ".pdf"];
+      var allowedFiles = [".png", ".jpeg", ".jpg", ".pdf"];
 
       var regex = new RegExp(
         "([a-zA-Z0-9s_\\.-:])+(" + allowedFiles.join("|") + ")$"

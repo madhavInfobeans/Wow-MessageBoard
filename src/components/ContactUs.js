@@ -51,7 +51,7 @@ const ContactUs = () => {
       document.querySelector(".form__okay").disabled = true;
     }
   };
-  const backHome = () => {
+  const displayList = () => {
     history.push("/displayuser");
   };
   return (
@@ -165,9 +165,6 @@ const ContactUs = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h4 className="modal-title">Form Submitted Successfully</h4>
-              <button onClick={backHome} className="close" data-dismiss="modal">
-                &times;
-              </button>
             </div>
             <div className="modal-body">
               <p>
@@ -178,7 +175,7 @@ const ContactUs = () => {
             <div className="modal-footer">
               <button
                 className="btn btn-danger"
-                onClick={backHome}
+                onClick={displayList}
                 data-dismiss="modal"
               >
                 Close
