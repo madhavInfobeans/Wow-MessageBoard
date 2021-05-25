@@ -5,12 +5,14 @@ $(document).ready(function () {
   $("#emailMsg").hide();
   $("#mobileMsg").hide();
   $("#messageMsg").hide();
+  $("#attachmentMsg").hide();
 
   var fname_err = false;
   var lname_err = false;
   var email_err = false;
   var mobile_err = false;
   var message_err = false;
+  var attachment_err = false;
 
   $("#firstname").focusout(function () {
     fname_check();
@@ -113,25 +115,61 @@ $(document).ready(function () {
     }
   }
 
+  $("#attachment").focusout(function () {
+    attachment_check();
+  });
+
+  function attachment_check() {
+    var attachment_val = $("#attachment").val();
+
+    if (attachment_val !== "") {
+      var allowedFiles = [".doc", ".docx", ".pdf"];
+
+      var regex = new RegExp(
+        "([a-zA-Z0-9s_\\.-:])+(" + allowedFiles.join("|") + ")$"
+      );
+      if (regex.test(attachment_val.toLowerCase()) && attachment_val !== "") {
+        $("#attachmentMsg").hide();
+      } else {
+        $("#attachmentMsg").show();
+        $("#attachmentMsg").html(
+          "Supported extensions: <b>" + allowedFiles.join(", ") + "</b> only."
+        );
+        $("#attachmentMsg").focusout();
+        $("#attachmentMsg").css("color", "red");
+        attachment_err = true;
+      }
+    } else {
+      $("#attachmentMsg").show();
+      $("#attachmentMsg").html("attachment is Required");
+      $("#attachmentMsg").focusout();
+      $("#attachmentMsg").css("color", "red");
+      attachment_err = true;
+    }
+  }
+
   $("#contactForm").submit(function () {
     fname_err = false;
     lname_err = false;
     email_err = false;
     mobile_err = false;
     message_err = false;
+    attachment_err = false;
 
     fname_check();
     lname_check();
     email_check();
     mobile_check();
     message_check();
+    attachment_check();
 
     if (
       fname_err === false &&
       lname_err === false &&
       email_err === false &&
       mobile_err === false &&
-      mobile_err === false
+      message_err === false &&
+      attachment_err === false
     ) {
       return true;
     } else {
