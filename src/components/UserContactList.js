@@ -5,7 +5,9 @@ function UserContactList(props) {
     <>
       <tr>
         <td>{props.data.id}</td>
-        <td>{props.data.firstname}</td>
+        <td>
+          {props.data.firstname} {props.data.lastname}
+        </td>
         <td>{props.data.email}</td>
         <td>{props.data.mobile}</td>
       </tr>
