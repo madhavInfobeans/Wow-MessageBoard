@@ -81,3 +81,6 @@ input:focus::placeholder {
   color: #fff;
   line-height: 1.2;
 }
+.form__okay {
+  display: none;
+}
