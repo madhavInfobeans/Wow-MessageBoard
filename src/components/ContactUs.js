@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../css/contactus.css";
 import axios from "axios";
+import "../js/contactFormValidation";
 
 const ContactUs = () => {
   const history = useHistory();
@@ -46,8 +47,12 @@ const ContactUs = () => {
     if (res.status === 422 || !data) {
       window.alert("Form not submitted");
     } else {
-      history.push("/displayuser");
+      document.querySelector(".form__okay").click();
+      document.querySelector(".form__okay").disabled = true;
     }
+  };
+  const backHome = () => {
+    history.push("/displayuser");
   };
   return (
     <div className="container-contact">
@@ -57,6 +62,7 @@ const ContactUs = () => {
           method="POST"
           encType="multipart/form-data"
           onSubmit={PostData}
+          id="contactForm"
         >
           <span className="contact-form-title">Get in Touch</span>
           <div className="contact-input-field ">
@@ -65,13 +71,14 @@ const ContactUs = () => {
             </label>
             <input
               className="input-field"
-              id="fname"
+              id="firstname"
               type="string"
               name="firstname"
               value={inputData.firstname}
               onChange={handleInputs}
               placeholder="Your FirstName"
             />
+            <span class="ml-2" id="fnameMsg"></span>
           </div>
           <div className="contact-input-field ">
             <label className="input-label">
@@ -79,13 +86,14 @@ const ContactUs = () => {
             </label>
             <input
               className="input-field"
-              id="name"
+              id="lastname"
               type="textInput"
               name="lastname"
               value={inputData.lastname}
               onChange={handleInputs}
               placeholder="Your LastName"
             />
+            <span class="ml-2" id="lnameMsg"></span>
           </div>
           <div className="contact-input-field ">
             <label className="input-label">
@@ -95,10 +103,12 @@ const ContactUs = () => {
               className="input-field"
               type="textInput"
               name="email"
+              id="emailId"
               value={inputData.email}
               onChange={handleInputs}
               placeholder=" Enter Email"
             />
+            <span class="ml-2" id="emailMsg"></span>
           </div>
           <div className="contact-input-field ">
             <label className="input-label">
@@ -113,30 +123,69 @@ const ContactUs = () => {
               onChange={handleInputs}
               placeholder="Contact"
             />
+            <span class="ml-2" id="mobileMsg"></span>
           </div>
           <div className="contact-input-field ">
             <input
               type="textarea"
               className="input-field"
+              id="message"
               name="message"
               value={inputData.message}
               onChange={handleInputs}
               placeholder="Any message..."
             />
+            <span class="ml-2" id="messageMsg"></span>
           </div>
           <div className="contact-input-field ">
             <input
               className="input-field"
-              id="file"
+              id="attachment"
               onChange={handleFiles}
               type="file"
               name="attachment"
             />
+            <span class="ml-2" id="attachmentMsg"></span>
           </div>
           <div className="contact-form-btn">
             <input type="submit" className="form-btn" value="Send Email" />
           </div>
         </form>
+      </div>
+
+      {/* Display Modal Popup on contact Submit successfully */}
+
+      <button
+        className="btn btn-primary form__okay"
+        data-toggle="modal"
+        data-target="#myModal"
+      ></button>
+      <div className="modal" id="myModal">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Form Submitted Successfully</h4>
+              <button onClick={backHome} className="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>
+                Your query has successfully been submitted! Kindly check your
+                registered email for confirmation.
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                onClick={backHome}
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
