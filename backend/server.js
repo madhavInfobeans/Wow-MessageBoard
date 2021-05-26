@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 
+app.set("view engine", "ejs");
+app.set("views", "views");
+
 // parse application/json
 app.use(bodyParser.json());
 //parse application/x-www-form-urlencoded
