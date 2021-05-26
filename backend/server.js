@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 
 dotenv.config({ path: "./.env" });
 require("./db/connection");
@@ -23,6 +24,9 @@ app.set("views", "views");
 app.use(bodyParser.json());
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const publicDirectory = path.join(__dirname, "./public/");
+app.use("/public", express.static(publicDirectory));
 
 app.use(express.json());
 app.use(cookieParser());

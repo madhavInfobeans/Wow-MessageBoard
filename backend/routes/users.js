@@ -79,6 +79,10 @@ router.get("/register", function (req, res) {
   res.render("userRegister");
 });
 
+router.get("/messageboard", function (req, res) {
+  res.render("msgBoardDataUpload");
+});
+
 // posting data to contact table
 router.post("/contact", upload1.single("attachment"), async (req, res) => {
   console.log(req.file);
