@@ -75,6 +75,10 @@ router.get("/", function (req, res) {
   res.json({ message: "Express is up! and running " });
 });
 
+router.get("/register", function (req, res) {
+  res.render("userRegister");
+});
+
 // posting data to contact table
 router.post("/contact", upload1.single("attachment"), async (req, res) => {
   console.log(req.file);
