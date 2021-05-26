@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact Us Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/css/mesageBoardForm.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container-message">
+      <div class="message">
+        <form action="/messageboard" method="POST" class="message-form">
+          <span class="message-form-title"> Message Board</span>
+          <div class="message-input-field">
+            <input class="input-field" type="file" name="image" />
+          </div>
+          <div class="message-input-field">
+            <label class="input-label">
+              <i class="fas fa-user"></i>
+            </label>
+            <input
+              class="input-field"
+              type="text"
+              name="title"
+              placeholder="Your Message Title"
+            />
+          </div>
+          <div class="message-input-field">
+            <label class="input-label">
+              <i class="fas fa-user"></i>
+            </label>
+            <input
+              class="input-field"
+              type="text"
+              name="description"
+              placeholder="Description"
+            />
+          </div>
+          <div class="message-input-field">
+            <label class="input-label">
+              <i class="far fa-envelope"></i>
+            </label>
+            <input
+              class="input-field"
+              type="text"
+              name="announcement"
+              placeholder=" Enter Announcement"
+            />
+          </div>
+          <div class="message-input-field">
+            <label class="input-label">
+              <i class="fas fa-mobile"></i>
+            </label>
+            <input
+              class="input-field"
+              type="text"
+              name="likes"
+              placeholder="Likes"
+            />
+          </div>
+          <div class="message-input-field">
+            <input
+              type="text"
+              class="input-field"
+              name="comments"
+              placeholder="Any comments..."
+            />
+          </div>
+          <div class="message-form-btn">
+            <input type="submit" class="form-btn" value="Upload Message" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
