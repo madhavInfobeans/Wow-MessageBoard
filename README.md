@@ -24,6 +24,8 @@ Blog Research for the project, We can run `npm run dev` to run client and server
 
 ### Other Details
 
+Email Sending to user on filling contact form.
+
 Useful dependencies of the project
 
 1 passport-jwt
