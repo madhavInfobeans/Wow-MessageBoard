@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const publicDirectory = path.join(__dirname, "./public/");
-app.use("/public", express.static(publicDirectory));
+const publicDirectory = path.join(__dirname, "./resources/");
+app.use("/resources", express.static(publicDirectory));
 
 app.use(express.json());
 app.use(cookieParser());

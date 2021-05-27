@@ -79,7 +79,7 @@ router.get("/register", function (req, res) {
   res.render("userRegister");
 });
 
-router.get("/messageboard", function (req, res) {
+router.get("/messageboardform", function (req, res) {
   res.render("msgBoardDataUpload");
 });
 
